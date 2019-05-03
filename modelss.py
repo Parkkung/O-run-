@@ -146,14 +146,15 @@ class World():
         self.init_platforms()
 
         self.ora.set_platform(self.platforms[0])
+        self.background = arcade.load_texture("images/Background.png")
 
     def init_platforms(self):
         self.platforms = [
-            Platform(self, 0, 100, 500, 50),
-            Platform(self, 500, 200, 500, 50),
-            Platform(self, 1050, 200, 500, 50),
-            Platform(self, 1500, 300, 500, 50),
-            Platform(self, 2050, 100, 500, 50),
+            Platform(self, 0, 100, 500, 70),
+            Platform(self, 500, 200, 200, 45),
+            Platform(self, 900, 200, 300, 60),
+            Platform(self, 1300, 300, 450, 80),
+            Platform(self, 1600, 100, 600, 40),
             ]
 
         self.coins = []

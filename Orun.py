@@ -1,5 +1,5 @@
 import arcade
-from character import World
+from modelss import World
 import pyglet.gl as gl
 
 # import codecs
@@ -21,6 +21,7 @@ class OrunGameWindow(arcade.Window):
         # arcade.set_background_color(arcade.color.BABY_BLUE)
 
         self.coin_texture = arcade.load_texture('images/coin.png')
+        self.background = arcade.load_texture("images/Background.png")
 
     # def setup(self):
     #     self.background = arcade.load_texture("images/Background.png")
@@ -48,6 +49,8 @@ class OrunGameWindow(arcade.Window):
                             0, SCREEN_HEIGHT)
 
         arcade.start_render()
+        arcade.draw_texture_rectangle(self.ora_sprite.center_x,SCREEN_HEIGHT // 2,
+                                      SCREEN_WIDTH + 50, SCREEN_HEIGHT, self.background)
         self.draw_platforms(self.world.platforms)
         self.draw_coins(self.world.coins)
 
@@ -58,8 +61,6 @@ class OrunGameWindow(arcade.Window):
                          self.height - 30,
                          arcade.color.WHITE, 20)
 
-        self.background = arcade.load_texture("images/Background.png")
-
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)
 
@@ -68,7 +69,7 @@ class ModelSprite(arcade.Sprite):
     def __init__(self, *args, **kwargs):
         self.model = kwargs.pop('model', None)
 
-        super().__init__(*args, **kwargs, scale=0.5)
+        super().__init__(*args, **kwargs, scale=0.35)
 
     def sync_with_model(self):
         if self.model:
@@ -84,7 +85,6 @@ class ModelSprite(arcade.Sprite):
 
 def main():
     window = OrunGameWindow(SCREEN_WIDTH,SCREEN_HEIGHT)
-    window.setup()
     arcade.run()
 
 if __name__ == '__main__':
