@@ -70,6 +70,9 @@ class Ora(Model):
     def bottom_y(self):
         return self.y - (ORA_RADIUS // 2)
 
+    def top_y(self):
+        return self.y + (ORA_RADIUS // 2)
+
     def set_platform(self, platform):
         self.is_jump = False
         self.platform = platform
@@ -105,6 +108,7 @@ class Ora(Model):
             return True
         if banana_hit == True:
             return True
+
         return False
 
 class Banana:
@@ -241,6 +245,7 @@ class World():
                 i.is_collected = True
                 if i.effect == False:
                     self.dead()
+
 
     def too_far_left_x(self):
         return self.ora.x - self.width

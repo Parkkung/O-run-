@@ -32,6 +32,10 @@ class OrunGameWindow(arcade.Window):
     def update(self, delta):
         if self.current_state ==2:
             self.world.update(delta)
+        elif self.world.ora.die():
+            self.world.update(delta)
+            self.current_state = self
+
 
     def draw_platforms(self, platforms):
         for p in platforms:
@@ -81,6 +85,19 @@ class OrunGameWindow(arcade.Window):
         arcade.draw_text("Click to start",
                          (SCREEN_WIDTH//2)-150, SCREEN_HEIGHT //2,
                          arcade.color.BLACK, 50)
+
+    def draw_gameover(self):
+        arcade.start_render()
+        background = arcade.load_texture("image/Gameoverbackground.png")
+        arcade.draw_texture_rectangle(SCREEN_WIDTH//2,SCREEN_HEIGHT//2,SCREEN_WIDTH,SCREEN_HEIGHT,background)
+        arcade.draw_text("GAME OVER"(SCREEN_WIDTH//2)-150, SCREEN_HEIGHT //2,
+                         arcade.color.WHITE, 50)
+        arcade.draw_text(f"Your score is {str(self.world.score)}",
+                         (SCREEN_WIDTH // 2) - 50, SCREEN_HEIGHT // 2 - 40,
+                         arcade.color.WHITE, 20)
+        arcade.draw_text("Click to restart",
+                         (SCREEN_WIDTH // 2) - 50, SCREEN_HEIGHT // 2 - 100,
+                        arcade.color.WHITE, 20)
 
     def on_draw(self):
         if self.current_state ==1:
